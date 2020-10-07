@@ -1,3 +1,3 @@
-import { getConnection } from 'typeorm';
+import { createConnection } from 'typeorm';
 
-getConnection();
+createConnection();

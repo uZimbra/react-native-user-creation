@@ -11,12 +11,11 @@ export default class CreateUsers1602084899253 implements MigrationInterface {
             type: 'uuid',
             generationStrategy: 'uuid',
             isPrimary: true,
-            default: 'uuid_generated_v4()',
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'name',
             type: 'varchar',
-            isNullable: false,
           },
           {
             name: 'email',
@@ -30,6 +29,7 @@ export default class CreateUsers1602084899253 implements MigrationInterface {
           {
             name: 'avatar',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'created_at',

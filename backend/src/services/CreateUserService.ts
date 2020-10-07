@@ -1,5 +1,5 @@
-import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
+import { getRepository } from 'typeorm';
 
 import AppError from '../errors/AppError';
 
@@ -13,25 +13,25 @@ interface Request {
 
 class CreateUserService {
   public async execute({ name, email, password }: Request): Promise<User> {
-    const userRepository = getRepository(User);
+    const usersRepository = getRepository(User);
 
-    const checkUserExistence = await userRepository.findOne({
-      where: email,
+    const checkUserExistence = await usersRepository.findOne({
+      where: { email },
     });
 
     if (checkUserExistence) {
-      throw new AppError('Email address already taken');
+      throw new AppError('Email address already taken.');
     }
 
     const hashedPassword = await hash(password, 8);
 
-    const user = userRepository.create({
+    const user = usersRepository.create({
       name,
       email,
       password: hashedPassword,
     });
 
-    await userRepository.save(user);
+    await usersRepository.save(user);
 
     delete user.password;
 
